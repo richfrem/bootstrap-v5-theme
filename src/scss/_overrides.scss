@@ -18,7 +18,7 @@
 @use "./variables" as *; // Added this line to fix Undefined variable error for theme variables
 
 // Explicitly @use Bootstrap variables to fix Undefined variable error for $grid-breakpoints
-//@use "~bootstrap/scss/variables" as *; // ADDED THIS LINE TO FIX $grid-breakpoints ERROR
+@use "~bootstrap/scss/variables" as *; // ADDED THIS LINE TO FIX $grid-breakpoints ERROR
 
 // Add this after your existing imports at the top of the file
 @use "~bootstrap/scss/mixins" as *; 
