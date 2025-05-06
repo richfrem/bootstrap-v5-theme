@@ -1,17 +1,26 @@
 {
-  "name": "bootstrap-theme",
-  "description": "Government of British Columbia Bootstrap v5 theme",
-  "version": "1.0.1",
+  "name": "@bcgov/bootstrap-v5-theme",
+  "description": "Gov BC Bootstrap v5 Theme",
+  "version": "1.0.0",
   "private": true,
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcgov/bootstrap-v5-theme.git"
+  },
   "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bcgov/bootstrap-v5-theme/issues"
+  },
+  "homepage": "",
   "stackblitz": {
     "startCommand": "npm start"
   },
   "scripts": {
-    "start": "webpack serve",
-    "build": "webpack build --mode=production",
-    "test": "npm run build"
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "prepare": "vite build",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
@@ -27,8 +36,22 @@
     "sass": "^1.76.0",
     "sass-loader": "^14.2.1",
     "style-loader": "^3.3.4",
+    "vite": "^5.1.4",
+    "vite-plugin-static-copy": "^2.3.1",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
-  }
+  },
+  "main": "dist/js/bootstrap-theme.min.js",
+  "exports": {
+    ".": "./dist/js/bootstrap-theme.min.js",
+    "./css": "./dist/css/bootstrap-theme.min.css",
+    "./scss": "./src/scss/bootstrap-theme.scss"
+  },
+  "keywords": [
+    "bootstrap",
+    "theme",
+    "bcgov"
+  ],
+  "author": ""
 }

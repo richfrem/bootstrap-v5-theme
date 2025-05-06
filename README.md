@@ -1,4 +1,3 @@
-
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 
@@ -128,3 +127,25 @@ If Bootstrap has a minor update and you wish to update the minified CSS and JS f
 1. Run `npm run build` in order to build the needed assests.
 2. Mark a new release on GitHub 
 3. Publish the updated dist folder to NPM JS Registry as a new NPM package version
+
+## Fork Information
+
+This fork has been updated to work with Bootstrap 5.3.3 and includes improved support for:
+
+- Consistent Sass import syntax using `@import` for better compatibility with Bootstrap 5.3.x
+- Modern build system using Vite instead of Webpack
+- Simplified asset management
+- Updated dependencies for better development experience
+
+### Vite Build System
+
+This theme now uses Vite for both development and production builds, offering:
+- Faster build times
+- Improved development experience with hot module replacement
+- Better asset optimization
+
+#### Development Workflow
+
+1. Install dependencies:
+   ```bash
+   npm install

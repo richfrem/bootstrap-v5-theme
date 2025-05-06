@@ -10,18 +10,11 @@
 // Reference: http://www2.gov.bc.ca/gov/content/governments/services-for-government/policies-procedures/web-content-development-guides/developers-guide/css-elements
 // sass-lint:disable force-element-nesting, force-pseudo-nesting
 
-// Use the sass:map module to access namespaced map functions
-@use "sass:map"; // Added this line
-
-// Use @use for local imports (like variables) and use a relative path
-@use "./variables" as *; // Added this line to fix Undefined variable error for theme variables
-
-// Explicitly @use Bootstrap variables to fix Undefined variable error for $grid-breakpoints
-// This is needed because $grid-breakpoints is used directly here and not reliably available via ./variables @use
-@use "~bootstrap/scss/variables" as *; // UNCOMMENTED AND ADDED THIS LINE TO FIX $grid-breakpoints ERROR
-
-// REMOVED: @use "~bootstrap/scss/mixins" as *; // This line is not needed as mixin calls were replaced
-
+// Import everything consistently using @import
+@import "./variables"; // Already using @import - keep this
+@import "bootstrap/scss/functions"; // Add functions first if needed
+@import "bootstrap/scss/variables"; // Replace @use with @import
+@import "bootstrap/scss/mixins"; // Add mixins import if needed
 
 .nav-link,
 .navbar-brand,
@@ -104,7 +97,7 @@ footer nav {
 }
 
 // Only sibling list items in footer get left border
-@each $breakpoint in map.keys($grid-breakpoints) { // map-keys fix already done
+@each $breakpoint in map-keys($grid-breakpoints) { // Changed map.keys to map-keys
   @include media-breakpoint-up($breakpoint) {
     footer {
       ul {

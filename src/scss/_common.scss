@@ -7,13 +7,13 @@
 // @import "/node_modules/bootstrap/scss/functions";
 // @import "/node_modules/bootstrap/scss/variables";
 // @import "/node_modules/bootstrap/scss/mixins";
-// @use "~bootstrap/scss/functions" as *;
+// @use "~bootstrap/scss/functions" as *;f
 // @use "~bootstrap/scss/variables" as *;
 // @use "~bootstrap/scss/mixins" as *;
 
 // Use @use for local imports (like variables) and use a relative path
 // Ensure this file only imports necessary local theme partials if any
-@use "./variables" as *; // Use theme variables
+@import "./variables"; // Use theme variables
 
 // Keep any other existing content of _common.scss below this that is not Bootstrap imports
 // Based on previous content, there might not be much else here.

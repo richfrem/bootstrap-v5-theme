@@ -1,12 +1,13 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_variables.scss
-// Fixed map-get deprecation and added Bootstrap variables @use
+// Fixed map-get deprecation and using consistent @import approach
 //version 1.0.07
-// Use the sass:map module to access namespaced map functions
-@use "sass:map"; // Added this line
+// Use standard map functions instead of sass:map module
+// REMOVED: @use "sass:map"; // Changed from @import to @use
 
-// Use Bootstrap variables as the base for theme variables
-// This is important for variables like $grid-breakpoints, $theme-colors etc.
-@use "~bootstrap/scss/variables" as *; // ADDED THIS LINE to make Bootstrap variables available within this file
+// Use Bootstrap's functions needed for variables
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
 
 // Change theme-colors (overrides Bootstrap's $theme-colors)
 $theme-colors: (
@@ -25,9 +26,9 @@ $theme-colors: (
 );
 
 //Theme-color function is initialized as it was dropped with version 5 migration
-// Use map.get within this function definition
+// Use standard map-get function instead of namespaced map.get
 @function theme-color($color-name){
-  @return map.get($map: $theme-colors, $key: $color-name);
+  @return map-get($theme-colors, $color-name);
 }
 
 // Add our font as default

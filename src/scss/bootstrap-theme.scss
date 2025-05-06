@@ -1,25 +1,43 @@
-// Main theme entry file using @use
-//version 1.0.08
-// Use @use rules, all at the top
+// Main theme entry file
+// version 1.0.08
+// Note: While modern Sass recommends @use, Bootstrap 5.3.x officially supports @import syntax
+// for better compatibility across different build systems. Converting to @use would require
+// more extensive refactoring of variable references across files.
 
-// First, import the specific mixins needed for validation
-@use "~bootstrap/scss/mixins/breakpoints" as *;  // Contains _assert-ascending mixin
+// First import Bootstrap's functions (needed for everything)
+@import "bootstrap/scss/functions";
 
-// Then use @use with ~bootstrap alias for the main Bootstrap entry point
-// This brings in all of Bootstrap's components, variables, functions, and mixins to this scope.
-@use "~bootstrap/scss/bootstrap" as *;
+// Import Bootstrap's mixins (contains _assert-ascending)
+@import "bootstrap/scss/mixins";
 
-// Use @use with relative paths for local theme partials
-// These files will now have access to Bootstrap variables, functions, and mixins
-// (depending on how they are @use'd within each partial).
-// Ensure all necessary theme partials are @use'd here.
-// Order can sometimes matter for variable overrides.
-@use "./variables" as *; // Use theme variables (which now @use Bootstrap variables)
-@use "./common" as *;
-@use "./overrides" as *;
-@use "./additions" as *;
-@use "./fonts" as *;
+// Import your variables file which may override Bootstrap defaults
+@import "./variables";
 
-// Keep any other styles that might exist directly in bootstrap-theme.scss below the @use rules.
-// Based on the content you provided, it looks like this file only contains imports,
-// so you likely don't have anything else below the @use block.
+// Now import Bootstrap core
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/utilities";
+
+// Import the rest of Bootstrap that you need
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/buttons";  // Add this
+@import "bootstrap/scss/nav";      // Add this
+@import "bootstrap/scss/navbar";   // Add this
+@import "bootstrap/scss/forms";    // Add this
+@import "bootstrap/scss/card";     // Add this
+@import "bootstrap/scss/alert";    // Add this
+@import "bootstrap/scss/transitions"; // Add this
+@import "bootstrap/scss/dropdown"; // Add this
+
+// Import utilities API last
+@import "bootstrap/scss/utilities/api";
+
+// Import your custom styles
+@import "./common";
+@import "./overrides";
+@import "./additions";
+@import "./fonts";
