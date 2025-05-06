@@ -1,6 +1,11 @@
-@import "/node_modules/bootstrap/scss/functions";
+// In your cloned bootstrap-v5-theme repository: src/scss/_common.scss
 
-@import "variables";
+// Use @use with ~bootstrap alias for Bootstrap partials
+@use "~bootstrap/scss/functions" as *;
+@use "~bootstrap/scss/variables" as *;
+@use "~bootstrap/scss/mixins" as *;
 
-@import "/node_modules/bootstrap/scss/variables";
-@import "/node_modules/bootstrap/scss/mixins";
+// Keep the other existing content of _common.scss below these @use rules
+// For example, if it had other local imports or styles, they go here:
+// @import "variables"; // Keep this if it imports a local theme variables file
+// ... rest of the _common.scss file content
