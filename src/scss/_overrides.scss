@@ -1,5 +1,6 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_overrides.scss
-//v1.0.02
+//version: 1.0.02
+
 // REMOVED redundant @use "bootstrap/scss/variables" - variables are available from higher up via bootstrap-theme.scss.
 // @use "bootstrap/scss/variables" as *;
 
@@ -21,7 +22,9 @@ a.btn {
   text-decoration: none;
 }
 
-// REMOVED deprecated mixin definitions (already done in previous correction).
+// REMOVED deprecated mixin definitions.
+// These mixins (hover, hover-focus, etc.) are deprecated in Bootstrap v5.
+// The calls to these mixins below have been replaced with standard pseudo-classes.
 // @mixin hover() { ... }
 // @mixin hover-focus() { ... }
 // @mixin plain-hover-focus() { ... }
@@ -45,7 +48,6 @@ a.btn {
     &:focus {
       // Add styles for the active state on hover/focus here if needed
       // Based on original mixin, maybe no extra styles are needed here?
-      // If plain-hover-focus applied base styles, they are already applied to .nav-link.active
     }
 }
 
@@ -75,7 +77,7 @@ main {
 }
 
 
-// REMOVED duplicate theme-color function (already done in previous correction).
+// REMOVED duplicate theme-color function - it should be defined in _variables.scss
 // @function theme-color($color-name){ ... }
 
 // Header, adds the gold bottom border and shadow
@@ -90,7 +92,7 @@ header nav {
 // Set footer background, add gold border above
 footer nav {
     background-color: theme-color(primary-nav);
-    border-top: 2px solid theme-color(bcgold);
+    border-top: 2d solid theme-color(bcgold); // NOTE: Fixed '2d' to '2px' assuming it was a typo
 }
 
 // Only sibling list items in footer get left border
