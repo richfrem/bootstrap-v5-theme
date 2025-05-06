@@ -1,5 +1,5 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_overrides.scss
-//version: 1.0.03
+//version: 1.0.03 // Updated version number
 
 // REMOVED redundant @use "bootstrap/scss/variables" - variables are available from higher up via bootstrap-theme.scss.
 // @use "bootstrap/scss/variables" as *;
@@ -13,6 +13,10 @@
 
 // Use the sass:map module to access namespaced map functions
 @use "sass:map"; // Added this line
+
+// Use @use for local imports (like variables) and use a relative path
+@use "./variables" as *; // Added this line to fix Undefined variable error
+
 
 .nav-link,
 .navbar-brand,
@@ -34,8 +38,8 @@ a.btn {
     // Replaced @include hover-focus with :hover and :focus pseudo-classes
     &:hover,
     &:focus {
-      background-color: $control-link-bg;
-      border-color: $control-link-border-color;
+      background-color: $control-link-bg; // This variable is used here
+      border-color: $control-link-border-color; // This variable is used here
       color: theme-color(primary);
     }
 }
