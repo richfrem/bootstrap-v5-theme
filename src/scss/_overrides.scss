@@ -1,5 +1,5 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_overrides.scss
-
+//v1.0.02
 // REMOVED redundant @use "bootstrap/scss/variables" - variables are available from higher up via bootstrap-theme.scss.
 // @use "bootstrap/scss/variables" as *;
 
@@ -21,40 +21,17 @@ a.btn {
   text-decoration: none;
 }
 
-// REMOVED deprecated mixin definitions.
-// These mixins (hover, hover-focus, etc.) are deprecated in Bootstrap v5.
-// If the code below uses them (@include hover-focus, etc.),
-// it might still cause warnings or errors related to using these deprecated mixins
-// if they are not properly handled by the Bootstrap version being @use'd.
-// The ideal fix is to update the usage of these mixins to modern SASS/CSS.
-// For now, we remove the definitions from here to clean up the theme's code.
-// @mixin hover() {
-//   &:hover { @content; }
-// }
-// @mixin hover-focus() {
-//   &:hover,
-//   &:focus {
-//     @content;
-//   }
-// }
-// @mixin plain-hover-focus() {
-//   &,
-//   &:hover,
-//   &:focus {
-//     @content;
-//   }
-// }
-// @mixin hover-focus-active() {
-//   &:hover,
-//   &:focus,
-//   &:active {
-//     @content;
-//   }
-// }
+// REMOVED deprecated mixin definitions (already done in previous correction).
+// @mixin hover() { ... }
+// @mixin hover-focus() { ... }
+// @mixin plain-hover-focus() { ... }
+// @mixin hover-focus-active() { ... }
 
 
 .nav-tabs .nav-link:not(.active) {
-    @include hover-focus { // This includes a deprecated mixin if still used
+    // Replaced @include hover-focus with :hover and :focus pseudo-classes
+    &:hover,
+    &:focus {
       background-color: $control-link-bg;
       border-color: $control-link-border-color;
       color: theme-color(primary);
@@ -62,20 +39,31 @@ a.btn {
 }
 
 .nav-tabs .nav-link.active {
-    @include plain-hover-focus; // This includes a deprecated mixin if still used
+    // Replaced @include plain-hover-focus with standard pseudo-classes
+    &, // Include the base state as plain-hover-focus did
+    &:hover,
+    &:focus {
+      // Add styles for the active state on hover/focus here if needed
+      // Based on original mixin, maybe no extra styles are needed here?
+      // If plain-hover-focus applied base styles, they are already applied to .nav-link.active
+    }
 }
 
 
 // Underline navbar links when active
 .navbar-nav .nav-link {
-  @include hover-focus { // This includes a deprecated mixin if still used
+  // Replaced @include hover-focus with :hover and :focus pseudo-classes
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
 }
 
 
 .list-group .list-group-item-action {
-  @include hover-focus { // This includes a deprecated mixin if still used
+  // Replaced @include hover-focus with :hover and :focus pseudo-classes
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
 }
@@ -87,11 +75,8 @@ main {
 }
 
 
-// REMOVED duplicate theme-color function - it should be defined in _variables.scss
-// //Theme-color function is initizled as it was dropped with version 5 migration
-// @function theme-color($color-name){
-//     @return map-get($map: $theme-colors, $key: $color-color);
-// }
+// REMOVED duplicate theme-color function (already done in previous correction).
+// @function theme-color($color-name){ ... }
 
 // Header, adds the gold bottom border and shadow
 header nav {
@@ -109,7 +94,7 @@ footer nav {
 }
 
 // Only sibling list items in footer get left border
-@each $breakpoint in map.keys($grid-breakpoints) { // Changed map-keys to map.keys
+@each $breakpoint in map.keys($grid-breakpoints) { // map-keys fix already done
   @include media-breakpoint-up($breakpoint) {
     footer {
       ul {
@@ -126,7 +111,9 @@ footer nav {
 // Underline footer links
 footer nav .nav-link {
   text-decoration: underline;
-  @include hover-focus { // This includes a deprecated mixin if still used
+  // Replaced @include hover-focus with :hover and :focus pseudo-classes
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 }
