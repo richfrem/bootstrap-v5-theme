@@ -1,5 +1,5 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_overrides.scss
-//version: 1.0.02
+//version: 1.0.03
 
 // REMOVED redundant @use "bootstrap/scss/variables" - variables are available from higher up via bootstrap-theme.scss.
 // @use "bootstrap/scss/variables" as *;
@@ -13,7 +13,6 @@
 
 // Use the sass:map module to access namespaced map functions
 @use "sass:map"; // Added this line
-
 
 .nav-link,
 .navbar-brand,
@@ -92,7 +91,7 @@ header nav {
 // Set footer background, add gold border above
 footer nav {
     background-color: theme-color(primary-nav);
-    border-top: 2d solid theme-color(bcgold); // NOTE: Fixed '2d' to '2px' assuming it was a typo
+    border-top: 2px solid theme-color(bcgold); // Corrected from 2d to 2px
 }
 
 // Only sibling list items in footer get left border
