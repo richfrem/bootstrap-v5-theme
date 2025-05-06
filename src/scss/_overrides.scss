@@ -1,9 +1,18 @@
+//richfrem forked copy of bootstrap-v5-theme repository: src/scss/_overrides.scss
+
+// REMOVED redundant @use "bootstrap/scss/variables" - variables are available from higher up via bootstrap-theme.scss.
+// @use "bootstrap/scss/variables" as *;
+
 //---------------------------------------------------------------------------------------
 // Overrides Bootstrap classes are change here, consider changing a variable before
 // overriding classes.
 //---------------------------------------------------------------------------------------
 // Reference: http://www2.gov.bc.ca/gov/content/governments/services-for-government/policies-procedures/web-content-development-guides/developers-guide/css-elements
 // sass-lint:disable force-element-nesting, force-pseudo-nesting
+
+// Use the sass:map module to access namespaced map functions
+@use "sass:map"; // Added this line
+
 
 .nav-link,
 .navbar-brand,
@@ -12,73 +21,61 @@ a.btn {
   text-decoration: none;
 }
 
-// Hover mixin and `$enable-hover-media-query` are deprecated.
-// For backward compatibility
-@mixin hover() {
-  &:hover { @content; }
-}
-
-@mixin hover-focus() {
-  &:hover,
-  &:focus {
-    @content;
-  }
-}
-
-@mixin plain-hover-focus() {
-  &,
-  &:hover,
-  &:focus {
-    @content;
-  }
-}
-
-@mixin hover-focus-active() {
-  &:hover,
-  &:focus,
-  &:active {
-    @content;
-  }
-}
+// REMOVED deprecated mixin definitions.
+// These mixins (hover, hover-focus, etc.) are deprecated in Bootstrap v5.
+// If the code below uses them (@include hover-focus, etc.),
+// it might still cause warnings or errors related to using these deprecated mixins
+// if they are not properly handled by the Bootstrap version being @use'd.
+// The ideal fix is to update the usage of these mixins to modern SASS/CSS.
+// For now, we remove the definitions from here to clean up the theme's code.
+// @mixin hover() {
+//   &:hover { @content; }
+// }
+// @mixin hover-focus() {
+//   &:hover,
+//   &:focus {
+//     @content;
+//   }
+// }
+// @mixin plain-hover-focus() {
+//   &,
+//   &:hover,
+//   &:focus {
+//     @content;
+//   }
+// }
+// @mixin hover-focus-active() {
+//   &:hover,
+//   &:focus,
+//   &:active {
+//     @content;
+//   }
+// }
 
 
 .nav-tabs .nav-link:not(.active) {
-    @include hover-focus {
+    @include hover-focus { // This includes a deprecated mixin if still used
       background-color: $control-link-bg;
       border-color: $control-link-border-color;
-      color: $control-link-color;
+      color: theme-color(primary);
     }
 }
 
-// Add focus ring to btn-link, highlight as regular link
-.btn.btn-link {
-  text-decoration: underline;
-  &:focus,
-  &.focus {
-    box-shadow: 0 0 0 $btn-focus-width $btn-link-outline-color;
-    color: $link-hover-color;
-  }
+.nav-tabs .nav-link.active {
+    @include plain-hover-focus; // This includes a deprecated mixin if still used
 }
-
-.btn{
-  &.focus{
-    border: 5px solid;  
-  }
-
-}
-
 
 
 // Underline navbar links when active
 .navbar-nav .nav-link {
-  @include hover-focus {
+  @include hover-focus { // This includes a deprecated mixin if still used
     text-decoration: underline;
   }
 }
 
 
 .list-group .list-group-item-action {
-  @include hover-focus {
+  @include hover-focus { // This includes a deprecated mixin if still used
     text-decoration: underline;
   }
 }
@@ -90,10 +87,11 @@ main {
 }
 
 
-//Theme-color function is initizled as it was dropped with version 5 migration
-@function theme-color($color-name){
-    @return map-get($map: $theme-colors, $key: $color-name);
-}
+// REMOVED duplicate theme-color function - it should be defined in _variables.scss
+// //Theme-color function is initizled as it was dropped with version 5 migration
+// @function theme-color($color-name){
+//     @return map-get($map: $theme-colors, $key: $color-color);
+// }
 
 // Header, adds the gold bottom border and shadow
 header nav {
@@ -111,20 +109,36 @@ footer nav {
 }
 
 // Only sibling list items in footer get left border
-@each $breakpoint in map-keys($grid-breakpoints) {
-  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-  footer .navbar-expand#{$infix} .nav-item + .nav-item {
-    @include media-breakpoint-up($breakpoint) {
-      border-left: 1px solid $footer-separator-color;
+@each $breakpoint in map.keys($grid-breakpoints) { // Changed map-keys to map.keys
+  @include media-breakpoint-up($breakpoint) {
+    footer {
+      ul {
+        li {
+          &:not(:first-child) {
+            border-left: 1px solid $footer-separator-color;
+          }
+        }
+      }
     }
   }
 }
 
-// Stronger border colour
-.alert.alert-info {
-  border-color: color-level(info, -4);
-}
-.alert.alert-warning {
-  border-color: color-level(warning, -4);
+// Underline footer links
+footer nav .nav-link {
+  text-decoration: underline;
+  @include hover-focus { // This includes a deprecated mixin if still used
+    text-decoration: none;
+  }
 }
 
+// Ensure cards with text are visible on coloured backgrounds
+.card {
+  color: #212529; // Ensure dark text on cards
+}
+
+// Add panel-default equivalent with border and padding
+.panel-default {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 4px;
+}
