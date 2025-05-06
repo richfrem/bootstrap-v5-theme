@@ -21,23 +21,32 @@ We combined the best of all projects and leverage the latest
 
 - ### Direct Integration with Minified Files
 
-    You can directly use the minified CSS and JS files in your project. The minified CSS file to link can be found via this [path](dist/css/bootstrap-theme.min.css):
+    You can directly use the minified CSS and JS files in your project after building with `npm run build`. The files will be available in the `dist` directory.
 
-    `dist/css/bootstrap-theme.min.css`
-
-    To ensure dropdowns, tooltips, and popovers function properly, you can import the minified JS file into your project. which can be found via this [path](dist/js/bootstrap-theme.min.js):
-
-    `dist/js/bootstrap-theme.min.js`
-
-    These files can be added to your project's `<head>` section:
+    For production use, add these to your HTML:
 
     ```html
     <head>
-    ...
-        <script defer="defer" src="js/bootstrap-theme.min.js"></script>
+        <!-- CSS file -->
         <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+        
+        <!-- JS file with type="module" for ES modules support -->
+        <script type="module" src="js/bootstrap-theme.min.js"></script>
     </head>
     ```
+
+    For development with source files, use this approach instead:
+
+    ```html
+    <head>
+        <!-- Import the JS which will automatically process the SCSS -->
+        <script type="module">
+            import './src/js/bootstrap-theme.js';
+        </script>
+    </head>
+    ```
+    
+    Note: The development approach directly imports the source JavaScript file, which in turn imports the SCSS. This provides the best experience when working with Vite's dev server.
 
 - ### SCSS To Modify Variables/Themes
 
@@ -54,30 +63,75 @@ We combined the best of all projects and leverage the latest
         After your tools are in place, you should install some packages. In the working directory:
 
         ```bash
-        git clone https://github.com/bcgov/bootstrap-v5-theme.git
+        git clone https://github.com/richfrem/bootstrap-v5-theme.git
         cd bootstrap-v5-theme
         npm install
         ```
 
     - #### Building Dist
 
-        To build the styles, JavaScript and other assets, use:
+        To build the styles, JavaScript and other assets for production, use:
 
         ```bash
-        npm run build
+        npm run build:vite
         ```    
 
-        Or for continuous building and real-time updates as you make changes:
+        This command uses Vite to build optimized CSS, JS, and assets for production.
+
+        For development with hot module replacement and real-time updates:
 
         ```bash
-        npm start
-        ```        
+        npm run dev
+        ```
+
+        Note: While the original `npm run build` command still exists for backward compatibility, 
+        we recommend using `npm run build:vite` for better performance and modern output formats.
 
 - ### Migration Guide From Version 4 to 5
 
     The [CHANGELOG](CHANGELOG.md) outlines the majority of classes and changes needed for migration, allowing you to easily refer to and perform search and replace where necessary.
 
     If you need to add or modify utilities, you can consult the official [bootstrap migration guide](https://getbootstrap.com/docs/5.3/migration/) for a comprehensive list of changes.
+
+## Migration Guide From Bootstrap 5.0 to 5.3.3
+
+This theme has been updated to work with Bootstrap 5.3.3, which includes several key changes from earlier Bootstrap 5 versions. Here's what you need to know:
+
+### Key Changes in Bootstrap 5.3.3
+
+1. **SASS Import Changes**: 
+   - We've converted from mixed `@use` and `@import` directives to consistent `@import` syntax
+   - Functions like `map.get()` are now used as `map-get()` for better compatibility
+   - If you're extending this theme, maintain this consistent approach
+
+2. **Color Mode Support**:
+   - Bootstrap 5.3+ adds built-in color modes (light/dark)
+   - Our theme now supports these modes with proper BC Gov styling
+   - Use the `.text-bg-*` utilities for proper color combinations with background colors
+
+3. **New CSS Variables**:
+   - Bootstrap 5.3 adds extensive CSS variables for colors, spacing, etc.
+   - Our theme overrides these appropriately for BC Gov styling
+   - You can use these variables directly in your custom CSS
+
+4. **Enhanced Grid System**:
+   - Added the new `.container-fluid` responsive variants
+   - Improved support for vertical spacing with gaps
+
+5. **Build System Update**:
+   - Switched from Webpack to Vite for better performance
+   - Use `npm run build:vite` instead of `npm run build` for production builds
+   - Use `npm run dev` for development with hot reloading
+
+### Migration Steps
+
+1. Update your HTML imports:
+   ```html
+   <!-- Old approach -->
+   <script src="js/bootstrap-theme.js" defer="defer"></script>
+   
+   <!-- New approach -->
+   <script type="module" src="js/bootstrap-theme.min.js"></script>
 
 ## Extending the Theme
 
