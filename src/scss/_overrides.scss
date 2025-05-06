@@ -1,5 +1,5 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_overrides.scss
-//version: 1.0.04
+//version: 1.0.05
 
 // REMOVED redundant @use "bootstrap/scss/variables" - variables are available from higher up via bootstrap-theme.scss.
 // @use "bootstrap/scss/variables" as *; // This commented line refers to a previous removal
@@ -18,7 +18,10 @@
 @use "./variables" as *; // Added this line to fix Undefined variable error for theme variables
 
 // Explicitly @use Bootstrap variables to fix Undefined variable error for $grid-breakpoints
-@use "~bootstrap/scss/variables" as *; // ADDED THIS LINE TO FIX $grid-breakpoints ERROR
+//@use "~bootstrap/scss/variables" as *; // ADDED THIS LINE TO FIX $grid-breakpoints ERROR
+
+// Add this after your existing imports at the top of the file
+@use "~bootstrap/scss/mixins" as *; 
 
 
 .nav-link,
