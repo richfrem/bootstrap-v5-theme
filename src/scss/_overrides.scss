@@ -1,8 +1,8 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_overrides.scss
-//version: 1.0.03 // Updated version number
+//version: 1.0.04
 
 // REMOVED redundant @use "bootstrap/scss/variables" - variables are available from higher up via bootstrap-theme.scss.
-// @use "bootstrap/scss/variables" as *;
+// @use "bootstrap/scss/variables" as *; // This commented line refers to a previous removal
 
 //---------------------------------------------------------------------------------------
 // Overrides Bootstrap classes are change here, consider changing a variable before
@@ -15,7 +15,10 @@
 @use "sass:map"; // Added this line
 
 // Use @use for local imports (like variables) and use a relative path
-@use "./variables" as *; // Added this line to fix Undefined variable error
+@use "./variables" as *; // Added this line to fix Undefined variable error for theme variables
+
+// Explicitly @use Bootstrap variables to fix Undefined variable error for $grid-breakpoints
+@use "~bootstrap/scss/variables" as *; // ADDED THIS LINE TO FIX $grid-breakpoints ERROR
 
 
 .nav-link,
@@ -38,8 +41,8 @@ a.btn {
     // Replaced @include hover-focus with :hover and :focus pseudo-classes
     &:hover,
     &:focus {
-      background-color: $control-link-bg; // This variable is used here
-      border-color: $control-link-border-color; // This variable is used here
+      background-color: $control-link-bg;
+      border-color: $control-link-border-color;
       color: theme-color(primary);
     }
 }
