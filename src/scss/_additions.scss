@@ -1,6 +1,7 @@
+//local edits in node_modules remember to update fork
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_additions.scss
-// Fixed map-keys deprecation and removed duplicate theme-color function
-//version 1.0.05
+// Fixed map-keys, added Bootstrap variables/mixins @use, removed duplicate theme-color function
+//version 1.0.07
 //---------------------------------------------------------------------------------------
 // Additions are for extra classes not found in the normal Bootstrap
 // WARNING: Do not create alot of new things here, remember always try to tweak and variable

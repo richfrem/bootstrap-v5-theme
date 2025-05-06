@@ -1,12 +1,11 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/bootstrap-theme.scss
 // Main theme entry file using @use
-//version 1.0.05
+//version 1.0.07
 // Use @use rules, all at the top
 
 // Use @use with ~bootstrap alias for the main Bootstrap entry point
 // This brings in all of Bootstrap's components, variables, functions, and mixins to this scope.
 @use "~bootstrap/scss/bootstrap" as *;
-
 // Use @use with relative paths for local theme partials
 // These files will now have access to Bootstrap variables, functions, and mixins
 // (depending on how they are @use'd within each partial).
