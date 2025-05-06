@@ -1,8 +1,6 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_overrides.scss
 //version: 1.0.05
-
-// REMOVED redundant @use "bootstrap/scss/variables" - variables are available from higher up via bootstrap-theme.scss.
-// @use "bootstrap/scss/variables" as *; // This commented line refers to a previous removal
+// Fixed Undefined Mixin and Undefined Variable errors
 
 //---------------------------------------------------------------------------------------
 // Overrides Bootstrap classes are change here, consider changing a variable before
@@ -18,10 +16,8 @@
 @use "./variables" as *; // Added this line to fix Undefined variable error for theme variables
 
 // Explicitly @use Bootstrap variables to fix Undefined variable error for $grid-breakpoints
-@use "~bootstrap/scss/variables" as *; // ADDED THIS LINE TO FIX $grid-breakpoints ERROR
-
-// Add this after your existing imports at the top of the file
-@use "~bootstrap/scss/mixins" as *; 
+// This is needed because $grid-breakpoints is used directly here and not reliably available via ./variables @use
+@use "~bootstrap/scss/variables" as *; // UNCOMMENTED AND ADDED THIS LINE TO FIX $grid-breakpoints ERROR
 
 
 .nav-link,
@@ -86,7 +82,7 @@ main {
 }
 
 
-// REMOVED duplicate theme-color function - it should be defined in _variables.scss
+// REMOVED duplicate theme-color function - it should be defined ONLY in _variables.scss
 // @function theme-color($color-name){ ... }
 
 // Header, adds the gold bottom border and shadow
@@ -140,3 +136,5 @@ footer nav .nav-link {
   padding: 15px;
   border-radius: 4px;
 }
+
+// Keep any other theme-specific overrides here.

@@ -1,5 +1,6 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_common.scss
-
+// Cleaned up redundant Bootstrap @use imports
+//version 1.0.05
 // Remove these @import and @use statements for Bootstrap partials.
 // They should be included by bootstrap-theme.scss or bcgov.scss higher up the chain.
 // @import "/node_modules/bootstrap/scss/functions";
@@ -10,8 +11,8 @@
 // @use "~bootstrap/scss/mixins" as *;
 
 // Use @use for local imports (like variables) and use a relative path
-@use "./variables" as *;
+// Ensure this file only imports necessary local theme partials if any
+@use "./variables" as *; // Use theme variables
 
-// Keep the other existing content of _common.scss below this.
-// This file should assume Bootstrap functions/variables/mixins are available from higher up.
-// Based on the content you previously uploaded, there might not be much else here initially.
+// Keep any other existing content of _common.scss below this that is not Bootstrap imports
+// Based on previous content, there might not be much else here.

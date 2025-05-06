@@ -1,9 +1,14 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/_variables.scss
-
+// Fixed map-get deprecation and added Bootstrap variables @use
+//version 1.0.05
 // Use the sass:map module to access namespaced map functions
-@use "sass:map"; // Add this line
+@use "sass:map"; // Added this line
 
-// Change theme-colors
+// Use Bootstrap variables as the base for theme variables
+// This is important for variables like $grid-breakpoints, $theme-colors etc.
+@use "~bootstrap/scss/variables" as *; // ADDED THIS LINE to make Bootstrap variables available within this file
+
+// Change theme-colors (overrides Bootstrap's $theme-colors)
 $theme-colors: (
   primary: #38598a,
   secondary:#6c757d, // new entry
@@ -19,10 +24,10 @@ $theme-colors: (
   dark: #212529, // new entries
 );
 
-//Theme-color function is initizled as it was dropped with version 5 migration
+//Theme-color function is initialized as it was dropped with version 5 migration
+// Use map.get within this function definition
 @function theme-color($color-name){
-  // Changed map-get to map.get
-  @return map.get($map: $theme-colors, $key: $color-name); // Changed map-get to map.get
+  @return map.get($map: $theme-colors, $key: $color-name);
 }
 
 // Add our font as default
@@ -103,3 +108,7 @@ $list-group-item-padding-y: 12px; //for navbar spacing
 
 $nav-pills-link-active-bg: theme-color(primary); //new entry for active color on pills w/t dropdowns
 $progress-bar-bg:theme-color(primary); //new entry for progress bars
+
+// Keep any other theme-specific variable overrides or custom variables here.
+// These will override Bootstrap's variables because this file is @use'd after Bootstrap's variables
+// are made available globally by bootstrap-theme.scss.

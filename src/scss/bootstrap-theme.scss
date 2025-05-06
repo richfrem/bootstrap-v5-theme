@@ -1,21 +1,23 @@
 //richfrem forked copy of bootstrap-v5-theme repository: src/scss/bootstrap-theme.scss
-
+// Main theme entry file using @use
+//version 1.0.05
 // Use @use rules, all at the top
 
 // Use @use with ~bootstrap alias for the main Bootstrap entry point
-// This brings in all of Bootstrap's components, variables, functions, and mixins
+// This brings in all of Bootstrap's components, variables, functions, and mixins to this scope.
 @use "~bootstrap/scss/bootstrap" as *;
 
 // Use @use with relative paths for local theme partials
-// These files will now have access to Bootstrap variables, functions, and mixins.
-// Ensure all necessary theme partials are @use'd here
-@use "./variables" as *; // Added/Ensured _variables is @use'd here
+// These files will now have access to Bootstrap variables, functions, and mixins
+// (depending on how they are @use'd within each partial).
+// Ensure all necessary theme partials are @use'd here.
+// Order can sometimes matter for variable overrides.
+@use "./variables" as *; // Use theme variables (which now @use Bootstrap variables)
 @use "./common" as *;
 @use "./overrides" as *;
 @use "./additions" as *;
 @use "./fonts" as *;
 
-
 // Keep any other styles that might exist directly in bootstrap-theme.scss below the @use rules.
-// Based on the content you previously provided, it looks like this file only contains imports,
+// Based on the content you provided, it looks like this file only contains imports,
 // so you likely don't have anything else below the @use block.
